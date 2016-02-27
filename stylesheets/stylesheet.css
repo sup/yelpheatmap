@@ -1,0 +1,120 @@
+/* CSS Stylesheet for Udacity Course Blog */
+
+html, body {
+  position: relative;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #424242;
+  color: #C94F64;
+}
+
+#map {
+  height: 80%;
+  box-shadow: 2px 2px 20px 2px black;
+}
+
+.center{
+  text-align: center;
+}
+
+.full-screen-container {
+  height: 100vh;
+  width: 100vw;
+}
+
+#floating-panel {
+  position: absolute;
+  left: 55%;
+  z-index: 5;
+  background-color: #fff;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+#floating-panel {
+  background-color: #fff;
+  border: 1px solid #999;
+  padding: 5px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.error {
+  color: red;
+}
+
+label {
+  display: block;
+  font-size: 20px;
+}
+
+label + label {
+    margin-top: 20px;
+}
+
+input[type=text] {
+    width: 500px;
+    font-size: 20px;
+    padding: 2px;
+    font-family: monospace;
+}
+
+textarea {
+  width: 500px;
+  height: 400px;
+  font-size: 17px;
+  font-family: monospace;
+}
+
+input[type=submit] {
+  font-size: 24px;
+}
+
+.button {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 0;
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+       -o-user-select: none;
+          user-select: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-decoration: none; 
+}
+
+.button-white {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.button-green {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.button-red {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}

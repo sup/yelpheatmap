@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Yelp Heat Map</title>
+    <meta name='description' content='See where the 5-star reviews are at in your city!'/
+    <meta name='author' content='Charles Jian Lai, cjl223@cornell.edu' />
+    <meta name='keywords' content='heatmaps, yelp, 5, star, review, dank'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,300' rel='stylesheet' type='text/css'>
+    <link href="stylesheets/front.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+  </head>
+  <body class="loading">
+    <div id="wrapper">
+      <div id="bg"></div>
+      <div id="main">
+        <!-- Header -->
+          <header id="header">
+            <h1>Yelp API Heatmap</h1>
+            <p>Restaurants in Ithaca and NYC</p>
+            <nav>
+              <ul>
+                <li><a href="ithaca" class="button">Ithaca</a></li>
+                <li><a href="nyc" class="button">NYC</a></li>
+              </ul>
+            </nav>
+          </header>
+      </div>
+    </div>
+    <script>
+      window.onload = function() { document.body.className = ''; }
+      window.ontouchmove = function() { return false; }
+      window.onorientationchange = function() { document.body.scrollTop = 0; }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Yelp Heat Map</title>
+    <meta name='description' content='See where the 5-star reviews are at in your city!'/>
+    <meta name='author' content='Charles Jian Lai, cjl223@cornell.edu' />
+    <meta name='keywords' content='heatmaps, yelp, 5, star, review, dank'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,300' rel='stylesheet' type='text/css'>
+    <link href="stylesheets/stylesheet.css" rel="stylesheet" type="text/css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+  </head>
+  <body>
+    <h1 class="center">Yelp Heatmap of NYC Chinese Food</h1>
+    <div id="floating-panel">
+      <button onclick="toggleHeatmap1()">One Star Heatmap</button>
+      <button onclick="toggleHeatmap2()">Two Star Heatmap</button>
+      <button onclick="toggleHeatmap3()">Three Star Heatmap</button>
+      <button onclick="toggleHeatmap4()">Four Star Heatmap</button>
+    </div>
+    <div id="map"></div>
+    <script>
+      var map, four_star_heatmap, three_star_heatmap, two_star_heatmap, one_star_heatmap
+      function initMap() {
+        // Create a map and center around Ithaca
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: {lat: 40.7127, lng: -74.0059},
+        });
+
+        // Get all points
+        points = getPoints();
+
+        // Initialize heat maps
+        four_star_heatmap = new google.maps.visualization.HeatmapLayer({
+          data: points["four_star"],
+          map: map
+        });
+        three_star_heatmap = new google.maps.visualization.HeatmapLayer({
+          data: points["three_star"],
+          map: map
+        });
+        two_star_heatmap = new google.maps.visualization.HeatmapLayer({
+          data: points["two_star"],
+          map: map
+        });
+        one_star_heatmap = new google.maps.visualization.HeatmapLayer({
+          data: points["one_star"],
+          map: map
+        });
+        // Initially hide all heat maps
+        toggleHeatmap1();
+        toggleHeatmap2();
+        toggleHeatmap3();
+        toggleHeatmap4();
+      }
+
+      /*
+        Toggling Functions for each heatmap
+       */
+      function toggleHeatmap1() {
+        one_star_heatmap.setMap(one_star_heatmap.getMap() ? null : map);
+      }
+
+      function toggleHeatmap2() {
+        two_star_heatmap.setMap(two_star_heatmap.getMap() ? null : map);
+      }
+
+      function toggleHeatmap3() {
+        three_star_heatmap.setMap(three_star_heatmap.getMap() ? null : map);
+      }
+
+      function toggleHeatmap4() {
+        four_star_heatmap.setMap(four_star_heatmap.getMap() ? null : map);
+      }
+
+
+      // Get Heatmap data
+      function getPoints() {
+        var points = {
+          "one_star": [],
+          "two_star": [],
+          "three_star": [],
+          "four_star": []
+        };
+        $.ajax({
+          url: '/nycdata',
+          type: 'GET',
+          dataType: 'json',
+          success: function(data, textStatus, xhr) {
+            var one_star = data[0]
+            var two_star = data[1]
+            var three_star = data[2]
+            var four_star = data[3]
+            // Loop over each list of businesses with each star class
+            for (var x in one_star) {
+              var lat = one_star[x]["lat"];
+              var lng = one_star[x]["lng"];
+              points["one_star"].push(new google.maps.LatLng(lat, lng));
+            }
+            for (var x in two_star) {
+              var lat = two_star[x]["lat"];
+              var lng = two_star[x]["lng"];
+              points["two_star"].push(new google.maps.LatLng(lat, lng));
+            }
+            for (var x in three_star) {
+              var lat = three_star[x]["lat"];
+              var lng = three_star[x]["lng"];
+              points["three_star"].push(new google.maps.LatLng(lat, lng));
+            }
+            for (var x in four_star) {
+              var lat = four_star[x]["lat"];
+              var lng = four_star[x]["lng"];
+              points["four_star"].push(new google.maps.LatLng(lat, lng));
+            }
+          },
+        });
+        return points
+      }
+
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?libraries=visualization&callback=initMap">
+    </script>
+  </body>
+</html>
